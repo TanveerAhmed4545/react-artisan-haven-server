@@ -42,6 +42,12 @@ async function run() {
         res.send(result);
     })
 
+    // My crafts
+    app.get('/craftItems/:userEmail',async(req,res)=>{
+        const result = await craftCollection.find({userEmail:req.params.userEmail}).toArray();
+        res.send(result);
+    })
+
     app.post('/craftItems',async(req,res)=>{
         const newCraft = req.body;
         const result = await craftCollection.insertOne(newCraft);
