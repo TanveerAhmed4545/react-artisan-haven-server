@@ -35,6 +35,12 @@ async function run() {
 
     const craftCollection = client.db('artisanDB').collection('craftItems');
 
+ 
+    app.get('/craftItems',async(req,res)=>{
+        const cursor = craftCollection.find();
+        const result = await cursor.toArray();
+        res.send(result);
+    })
 
     app.post('/craftItems',async(req,res)=>{
         const newCraft = req.body;
