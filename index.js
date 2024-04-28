@@ -34,7 +34,13 @@ async function run() {
     await client.connect();
 
     const craftCollection = client.db('artisanDB').collection('craftItems');
+    const artCollection = client.db('artisanDB').collection('artItems');
 
+    app.get('/artItems',async(req,res)=>{
+        const cursor = artCollection.find();
+        const result = await cursor.toArray();
+        res.send(result);
+    })
  
     app.get('/craftItems',async(req,res)=>{
         const cursor = craftCollection.find();
@@ -48,6 +54,9 @@ async function run() {
         const result = await craftCollection.findOne(query);
         res.send(result);
     })
+
+    // get for home Craft items section
+    
 
     // My crafts
     app.get('/craftItems/:userEmail',async(req,res)=>{
